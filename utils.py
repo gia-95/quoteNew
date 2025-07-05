@@ -58,9 +58,9 @@ def df_ace_surface (giocatore, df_match, surface, grandSlam=False) :
         lambda row: row['w_ace'] if row['winner_name'] == giocatore else row['l_ace'], axis=1
     )
     
-    if (len(df_aces != 0 )) :
-        print(f"PARTITE SU SUPERFICE ({df_aces['tourney_id'].iloc[0][:4]}) ({('GS' if grandSlam  else 'non GS')})")
-        print(df_aces, "\n")
+    # if (len(df_aces != 0 )) :
+    #     print(f"PARTITE SU SUPERFICE ({df_aces['tourney_id'].iloc[0][:4]}) ({('GS' if grandSlam  else 'non GS')})")
+    #     print(df_aces, "\n")
         
     return df_aces 
 
@@ -125,5 +125,48 @@ def df_ace_tournament_vs_opponent(giocatore, avversario, df_match, tournament):
     
     return df_aces
 
-def df_ace_subiti_avversario(giocatore, avversario, df_match) :
-    return None
+def df_ace_subiti_avversario(avversario, df_match, grandSlam=False) :
+    # Partite giocatore
+    df_giocatore = df_match[(df_match['winner_name'] == avversario) | (df_match['loser_name'] == avversario)]
+    
+    # Elimina Grandi Slam (best_of = 3)
+    df_giocatore = df_giocatore[df_giocatore['best_of'] == (3 if grandSlam == False else 5)]
+    
+    # Filtra colonne aces
+    df_aces_subAvversario = df_giocatore[['tourney_id', 'winner_name', 'loser_name', 'w_ace', 'l_ace']]
+
+    # Crea una colonna 'aces_giocatore' con il numero di ace fatti dal giocatore
+    df_aces_subAvversario['aces_giocatore'] = df_aces_subAvversario.apply(
+        lambda row: row['w_ace'] if row['winner_name'] == avversario else row['l_ace'], axis=1
+    )
+    
+    if (len(df_aces_subAvversario != 0 )) :
+        print(f"PARTITE AVVERSARIO({df_aces_subAvversario['tourney_id'].iloc[0][:4]}) ({('GS' if grandSlam  else 'non GS')})")
+        print(df_aces_subAvversario, "\n")
+        
+    return df_aces_subAvversario 
+
+def df_ace_subiti_avversario_surface(avversario, df_match, surface, grandSlam=False) :
+    # Partite giocatore
+    df_giocatore = df_match[(df_match['winner_name'] == avversario) | (df_match['loser_name'] == avversario)]
+    
+    # (best_of = 3)
+    df_giocatore = df_giocatore[df_giocatore['best_of'] == (3 if grandSlam == False else 5)]
+    
+    # Filtra su SUPERFICE
+    df_giocatore = df_giocatore[df_giocatore['surface'] == surface]
+    
+    # Filtra colonne aces
+    df_aces_subAvversario = df_giocatore[['tourney_id', 'winner_name', 'loser_name', 'w_ace', 'l_ace']]
+
+    # Crea una colonna 'aces_giocatore' con il numero di ace fatti dal giocatore
+    df_aces_subAvversario['aces_giocatore'] = df_aces_subAvversario.apply(
+        lambda row: row['w_ace'] if row['winner_name'] == avversario else row['l_ace'], axis=1
+    )
+    
+    # if (len(df_aces_subAvversario != 0 )) :
+    #     print(f"PARTITE AVVERSARIO SU SUPERFICE ({df_aces_subAvversario['tourney_id'].iloc[0][:4]}) ({('GS' if grandSlam  else 'non GS')})")
+    #     print(df_aces_subAvversario, "\n")
+        
+    return df_aces_subAvversario
+

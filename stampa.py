@@ -22,7 +22,7 @@ df_match_2022 = pd.read_csv('data/atp_matches_2022.csv')
 ######################################################
 #                   2024                             #
 ######################################################
-### CIRCUITO ATP
+###------------  ATP ---------------------------------------
 df_aces_2024 = utils.df_ace(GIOCATORE, df_match_2024)
 n_matches_2024 = len(df_aces_2024)
 mean_ace_2024 = df_aces_2024['aces_giocatore'].mean()
@@ -42,8 +42,19 @@ df_aces_2024_superfice_vs_opp = utils.df_ace_superfice_vs_opponent(GIOCATORE, av
 n_matches_2024_superfice_vs_opp = len(df_aces_2024_superfice_vs_opp)
 mean_ace_2024_superfice_vs_opp = df_aces_2024_superfice_vs_opp['aces_giocatore'].mean()
 dev_std_aces_2024_superfice_vs_opp = df_aces_2024_superfice_vs_opp['aces_giocatore'].std()
+### * SUBITI AVVERSARIO
+df_ace_subitiAvversario_2024 = utils.df_ace_subiti_avversario(avversario, df_match_2024, False)
+n_matches_subitiAvversario_2024 = len(df_ace_subitiAvversario_2024)
+mean_ace__subitiAvversario_2024 = df_ace_subitiAvversario_2024['aces_giocatore'].mean()
+dev_std_ace_ubitiAvversario_2024_aces = df_ace_subitiAvversario_2024['aces_giocatore'].std()
+### * SUBITI AVVERSARIO SU SUPERFICE
+df_ace_subitiAvversario_surface_2024 = utils.df_ace_subiti_avversario_surface(avversario, df_match_2024, SUPERFICE, False)
+n_matches_subitiAvversario_surface_2024 = len(df_ace_subitiAvversario_surface_2024)
+mean_ace__subitiAvversario_surface_2024 = df_ace_subitiAvversario_surface_2024['aces_giocatore'].mean()
+dev_std_ace_ubitiAvversario_surface_2024_aces = df_ace_subitiAvversario_surface_2024['aces_giocatore'].std()
 
-###  GRANDI SLAM
+
+###------------  GRANDI SLAM ---------------------------------------
 df_aces_2024_gSlam = utils.df_ace(GIOCATORE, df_match_2024, grandSlam=True)
 n_matches_2024_gSlam = len(df_aces_2024_gSlam)
 mean_ace_2024_gSlam = df_aces_2024_gSlam['aces_giocatore'].mean()
@@ -63,6 +74,17 @@ df_aces_2024_superfice_vs_opp_gSlam = utils.df_ace_superfice_vs_opponent(GIOCATO
 n_matches_2024_superfice_vs_opp_gSlam = len(df_aces_2024_superfice_vs_opp_gSlam)
 mean_ace_2024_superfice_vs_opp_gSlam = df_aces_2024_superfice_vs_opp_gSlam['aces_giocatore'].mean()
 dev_std_aces_2024_superfice_vs_opp_gSlam = df_aces_2024_superfice_vs_opp_gSlam['aces_giocatore'].std()
+### * SUBITI AVVERSARIO GS
+df_ace_subitiAvversario_2024_gSlam = utils.df_ace_subiti_avversario(avversario, df_match_2024, True)
+n_matches_subitiAvversario_2024_gSlam = len(df_ace_subitiAvversario_2024_gSlam)
+mean_ace__subitiAvversario_2024_gSlam = df_ace_subitiAvversario_2024_gSlam['aces_giocatore'].mean()
+dev_std_ace_ubitiAvversario_2024_aces_gSlam = df_ace_subitiAvversario_2024_gSlam['aces_giocatore'].std()
+### * SUBITI AVVERSARIO SU SUPERFICE GS
+df_ace_subitiAvversario_surface_2024_gSlam = utils.df_ace_subiti_avversario_surface(avversario, df_match_2024, SUPERFICE, True)
+n_matches_subitiAvversario_surface_2024_gSlam = len(df_ace_subitiAvversario_surface_2024_gSlam)
+mean_ace__subitiAvversario_surface_2024_gSlam = df_ace_subitiAvversario_surface_2024_gSlam['aces_giocatore'].mean()
+dev_std_ace_ubitiAvversario_surface_2024_ace_gSlams = df_ace_subitiAvversario_surface_2024_gSlam['aces_giocatore'].std()
+
 
 ### TORNAMENT
 df_aces_2024_tournament = utils.df_ace_tournament(GIOCATORE, df_match_2024,TOURNAMENT)
@@ -74,6 +96,7 @@ df_aces_2024_tournament_vs_opp = utils.df_ace_tournament_vs_opponent(GIOCATORE, 
 n_matches_2024_tournament_vs_opp = len(df_aces_2024_tournament_vs_opp)
 mean_ace_2024_tournament_vs_opp = df_aces_2024_tournament_vs_opp['aces_giocatore'].mean()
 dev_std_aces_2024_tournament_vs_opp = df_aces_2024_tournament_vs_opp['aces_giocatore'].std()
+
 
 
 ######################################################
@@ -216,8 +239,14 @@ print(f"  Aces VS {avversario}: {mean_ace_2024_vs_opp:.2f} | std: {dev_std_aces_
 print(f"\n- AVVERSARIO & SUPERFICE")
 print(f"  Partite giocate VS {avversario} su {SUPERFICE}: {n_matches_2024_superfice_vs_opp}")
 print(f"  Media aces VS {avversario} su {SUPERFICE}: {mean_ace_2024_superfice_vs_opp:.2f} | std: {dev_std_aces_2024_superfice_vs_opp:.2f}")
+# * ACE SUBITI AVVERSARIO
+print(f"\n* ACE SUBITI AVVERSARIO")
+print(f"  Partite giocate Avversario : {n_matches_subitiAvversario_2024}")
+print(f"  Media aces subiti Avversario: {mean_ace__subitiAvversario_2024:.2f} | std: {dev_std_ace_ubitiAvversario_2024_aces:.2f}")
+print(f"  Media aces subiti Avversario su {SUPERFICE} (n° partite {n_matches_subitiAvversario_surface_2024}): {mean_ace__subitiAvversario_surface_2024:.2f} | std: {dev_std_ace_ubitiAvversario_surface_2024_aces:.2f}")
 
-# Grandi Slam
+
+### GRANDI SLAM
 print("\n\n--------------  GRANDI SLAM  --------------")
 print(f"  Partite giocate: {n_matches_2024_gSlam}")
 print(f"  Media aces : {mean_ace_2024_gSlam:.2f} | std: {dev_std_aces_2024_gSlam:.2f}")
@@ -233,8 +262,13 @@ print(f"  Media aces VS {avversario}: {mean_ace_2024_gSlam_vs_opp:.2f} | std: {d
 print(f"\n- AVVERSARIO & SUPERFICE")
 print(f"  Partite giocate VS {avversario} su {SUPERFICE}: {n_matches_2024_superfice_vs_opp_gSlam}")
 print(f"  Media aces VS {avversario} su {SUPERFICE}: {mean_ace_2024_superfice_vs_opp_gSlam:.2f} | std: {dev_std_aces_2024_superfice_vs_opp_gSlam:.2f}")
+# * ACE SUBITI AVVERSARIO
+print(f"\n* ACE SUBITI AVVERSARIO")
+print(f"  Partite giocate Avversario : {n_matches_subitiAvversario_2024_gSlam}")
+print(f"  Media aces subiti Avversario: {mean_ace__subitiAvversario_2024_gSlam:.2f} | std: {dev_std_ace_ubitiAvversario_2024_aces_gSlam:.2f}")
+print(f"  Media aces subiti Avversario su {SUPERFICE} (n° partite {n_matches_subitiAvversario_surface_2024_gSlam}): {mean_ace__subitiAvversario_surface_2024_gSlam:.2f} | std: {dev_std_ace_ubitiAvversario_surface_2024_aces:.2f}")
 
-# Tournament
+### TOURNAMENT
 print(f"\n\n--------------  TOURNAMENT: {TOURNAMENT}  (2024)  --------------")
 print(f"  Partite giocate: {n_matches_2024_tournament}")
 print(f"  Media aces : {mean_ace_2024_tournament:.2f} | std: {dev_std_aces_2024_tournament:.2f}")
@@ -245,97 +279,97 @@ print(f"  Media aces VS {avversario} in {TOURNAMENT}: {mean_ace_2024_tournament_
 
 
 
-print(f"\n###############################################################")
-print(f"#########################   2023    ###########################")
-print(f"###############################################################")# Tutte le partite
-print("\n---------------------  ATP  ---------------------")
-print(f"  Partite giocate: {n_matches_2023}")
-print(f"  Aces : {mean_ace_2023:.2f} | std: {dev_std_aces_2023:.2f}")
-# Superfice
-print(f"\n- SUPERFICE: {SUPERFICE}")
-print(f"  Partite giocate su {SUPERFICE}: {n_matches_2023_superfice}")
-print(f"  Aces su {SUPERFICE}: {mean_ace_2023_superfice:.2f} | std: {dev_std_aces_2023_superfice:.2f}")
-# VS Avversario
-print(f"\n- AVVERSARIO: {avversario}")
-print(f"  Partite VS {avversario} : {n_matches_2023_vs_opp}")
-print(f"  Aces VS {avversario}: {mean_ace_2023_vs_opp:.2f} | std: {dev_std_aces_2023_vs_opp:.2f}")
-# Superfice e Avversario
-print(f"\n- AVVERSARIO & SUPERFICE")
-print(f"  Partite giocate VS {avversario} su {SUPERFICE}: {n_matches_2023_superfice_vs_opp}")
-print(f"  Media aces VS {avversario} su {SUPERFICE}: {mean_ace_2023_superfice_vs_opp:.2f} | std: {dev_std_aces_2023_superfice_vs_opp:.2f}")
+# print(f"\n###############################################################")
+# print(f"#########################   2023    ###########################")
+# print(f"###############################################################")# Tutte le partite
+# print("\n---------------------  ATP  ---------------------")
+# print(f"  Partite giocate: {n_matches_2023}")
+# print(f"  Aces : {mean_ace_2023:.2f} | std: {dev_std_aces_2023:.2f}")
+# # Superfice
+# print(f"\n- SUPERFICE: {SUPERFICE}")
+# print(f"  Partite giocate su {SUPERFICE}: {n_matches_2023_superfice}")
+# print(f"  Aces su {SUPERFICE}: {mean_ace_2023_superfice:.2f} | std: {dev_std_aces_2023_superfice:.2f}")
+# # VS Avversario
+# print(f"\n- AVVERSARIO: {avversario}")
+# print(f"  Partite VS {avversario} : {n_matches_2023_vs_opp}")
+# print(f"  Aces VS {avversario}: {mean_ace_2023_vs_opp:.2f} | std: {dev_std_aces_2023_vs_opp:.2f}")
+# # Superfice e Avversario
+# print(f"\n- AVVERSARIO & SUPERFICE")
+# print(f"  Partite giocate VS {avversario} su {SUPERFICE}: {n_matches_2023_superfice_vs_opp}")
+# print(f"  Media aces VS {avversario} su {SUPERFICE}: {mean_ace_2023_superfice_vs_opp:.2f} | std: {dev_std_aces_2023_superfice_vs_opp:.2f}")
 
-# Grandi Slam
-print("\n\n--------------  GRANDI SLAM  --------------")
-print(f"  Partite giocate: {n_matches_2023_gSlam}")
-print(f"  Media aces : {mean_ace_2023_gSlam:.2f} | std: {dev_std_aces_2023_gSlam:.2f}")
-# Superfice
-print(f"\n- SUPERFICE: {SUPERFICE}")
-print(f"  Partite GS giocate su {SUPERFICE}: {n_matches_2023_superfice_gSlam}")
-print(f"  Media aces su {SUPERFICE}: {mean_ace_2023_superfice_gSlam:.2f} | std: {dev_std_aces_2023_superfice_gSlam:.2f}")
-# Avversario
-print(f"\n- AVVERSARIO: {avversario}")
-print(f"  Partite VS {avversario} : {n_matches_2023_gSlam_vs_opp}")
-print(f"  Media aces VS {avversario}: {mean_ace_2023_gSlam_vs_opp:.2f} | std: {dev_std_aces_2023_gSlam_vs_opp:.2f}")
-# Superfice e Avversario
-print(f"\n- AVVERSARIO & SUPERFICE")
-print(f"  Partite giocate VS {avversario} su {SUPERFICE}: {n_matches_2023_superfice_vs_opp_gSlam}")
-print(f"  Media aces VS {avversario} su {SUPERFICE}: {mean_ace_2023_superfice_vs_opp_gSlam:.2f} | std: {dev_std_aces_2023_superfice_vs_opp_gSlam:.2f}")
+# # Grandi Slam
+# print("\n\n--------------  GRANDI SLAM  --------------")
+# print(f"  Partite giocate: {n_matches_2023_gSlam}")
+# print(f"  Media aces : {mean_ace_2023_gSlam:.2f} | std: {dev_std_aces_2023_gSlam:.2f}")
+# # Superfice
+# print(f"\n- SUPERFICE: {SUPERFICE}")
+# print(f"  Partite GS giocate su {SUPERFICE}: {n_matches_2023_superfice_gSlam}")
+# print(f"  Media aces su {SUPERFICE}: {mean_ace_2023_superfice_gSlam:.2f} | std: {dev_std_aces_2023_superfice_gSlam:.2f}")
+# # Avversario
+# print(f"\n- AVVERSARIO: {avversario}")
+# print(f"  Partite VS {avversario} : {n_matches_2023_gSlam_vs_opp}")
+# print(f"  Media aces VS {avversario}: {mean_ace_2023_gSlam_vs_opp:.2f} | std: {dev_std_aces_2023_gSlam_vs_opp:.2f}")
+# # Superfice e Avversario
+# print(f"\n- AVVERSARIO & SUPERFICE")
+# print(f"  Partite giocate VS {avversario} su {SUPERFICE}: {n_matches_2023_superfice_vs_opp_gSlam}")
+# print(f"  Media aces VS {avversario} su {SUPERFICE}: {mean_ace_2023_superfice_vs_opp_gSlam:.2f} | std: {dev_std_aces_2023_superfice_vs_opp_gSlam:.2f}")
 
-# Tournament
-print(f"\n\n--------------  TOURNAMENT: {TOURNAMENT}  (2023)  --------------")
-print(f"  Partite giocate: {n_matches_2023_tournament}")
-print(f"  Media aces : {mean_ace_2023_tournament:.2f} | std: {dev_std_aces_2023_tournament:.2f}")
-# Avversario
-print(f"\n- AVVERSARIO: {avversario}")
-print(f"  Partite giocate VS {avversario} in {TOURNAMENT}: {n_matches_2023_tournament_vs_opp}")
-print(f"  Media aces VS {avversario} in {TOURNAMENT}: {mean_ace_2023_tournament_vs_opp:.2f} | std: {dev_std_aces_2023_tournament_vs_opp:.2f}")
+# # Tournament
+# print(f"\n\n--------------  TOURNAMENT: {TOURNAMENT}  (2023)  --------------")
+# print(f"  Partite giocate: {n_matches_2023_tournament}")
+# print(f"  Media aces : {mean_ace_2023_tournament:.2f} | std: {dev_std_aces_2023_tournament:.2f}")
+# # Avversario
+# print(f"\n- AVVERSARIO: {avversario}")
+# print(f"  Partite giocate VS {avversario} in {TOURNAMENT}: {n_matches_2023_tournament_vs_opp}")
+# print(f"  Media aces VS {avversario} in {TOURNAMENT}: {mean_ace_2023_tournament_vs_opp:.2f} | std: {dev_std_aces_2023_tournament_vs_opp:.2f}")
 
 
 
-print(f"\n###############################################################")
-print(f"#########################   2022    ###########################")
-print(f"###############################################################")# Tutte le partite
-print("\n---------------------  ATP  ---------------------")
-print(f"  Partite giocate: {n_matches_2022}")
-print(f"  Aces : {mean_ace_2022:.2f} | std: {dev_std_aces_2022:.2f}")
-# Superfice
-print(f"\n- SUPERFICE: {SUPERFICE}")
-print(f"  Partite giocate su {SUPERFICE}: {n_matches_2022_superfice}")
-print(f"  Aces su {SUPERFICE}: {mean_ace_2022_superfice:.2f} | std: {dev_std_aces_2022_superfice:.2f}")
-# VS Avversario
-print(f"\n- AVVERSARIO: {avversario}")
-print(f"  Partite VS {avversario} : {n_matches_2022_vs_opp}")
-print(f"  Aces VS {avversario}: {mean_ace_2022_vs_opp:.2f} | std: {dev_std_aces_2022_vs_opp:.2f}")
-# Superfice e Avversario
-print(f"\n- AVVERSARIO & SUPERFICE")
-print(f"  Partite giocate VS {avversario} su {SUPERFICE}: {n_matches_2022_superfice_vs_opp}")
-print(f"  Media aces VS {avversario} su {SUPERFICE}: {mean_ace_2022_superfice_vs_opp:.2f} | std: {dev_std_aces_2022_superfice_vs_opp:.2f}")
+# print(f"\n###############################################################")
+# print(f"#########################   2022    ###########################")
+# print(f"###############################################################")# Tutte le partite
+# print("\n---------------------  ATP  ---------------------")
+# print(f"  Partite giocate: {n_matches_2022}")
+# print(f"  Aces : {mean_ace_2022:.2f} | std: {dev_std_aces_2022:.2f}")
+# # Superfice
+# print(f"\n- SUPERFICE: {SUPERFICE}")
+# print(f"  Partite giocate su {SUPERFICE}: {n_matches_2022_superfice}")
+# print(f"  Aces su {SUPERFICE}: {mean_ace_2022_superfice:.2f} | std: {dev_std_aces_2022_superfice:.2f}")
+# # VS Avversario
+# print(f"\n- AVVERSARIO: {avversario}")
+# print(f"  Partite VS {avversario} : {n_matches_2022_vs_opp}")
+# print(f"  Aces VS {avversario}: {mean_ace_2022_vs_opp:.2f} | std: {dev_std_aces_2022_vs_opp:.2f}")
+# # Superfice e Avversario
+# print(f"\n- AVVERSARIO & SUPERFICE")
+# print(f"  Partite giocate VS {avversario} su {SUPERFICE}: {n_matches_2022_superfice_vs_opp}")
+# print(f"  Media aces VS {avversario} su {SUPERFICE}: {mean_ace_2022_superfice_vs_opp:.2f} | std: {dev_std_aces_2022_superfice_vs_opp:.2f}")
 
-# Grandi Slam
-print("\n\n--------------  GRANDI SLAM  --------------")
-print(f"  Partite giocate: {n_matches_2022_gSlam}")
-print(f"  Media aces : {mean_ace_2022_gSlam:.2f} | std: {dev_std_aces_2022_gSlam:.2f}")
-# Superfice
-print(f"\n- SUPERFICE: {SUPERFICE}")
-print(f"  Partite GS giocate su {SUPERFICE}: {n_matches_2022_superfice_gSlam}")
-print(f"  Media aces su {SUPERFICE}: {mean_ace_2022_superfice_gSlam:.2f} | std: {dev_std_aces_2022_superfice_gSlam:.2f}")
-# Avversario
-print(f"\n- AVVERSARIO: {avversario}")
-print(f"  Partite VS {avversario} : {n_matches_2022_gSlam_vs_opp}")
-print(f"  Media aces VS {avversario}: {mean_ace_2022_gSlam_vs_opp:.2f} | std: {dev_std_aces_2022_gSlam_vs_opp:.2f}")
-# Superfice e Avversario
-print(f"\n- AVVERSARIO & SUPERFICE")
-print(f"  Partite giocate VS {avversario} su {SUPERFICE}: {n_matches_2022_superfice_vs_opp_gSlam}")
-print(f"  Media aces VS {avversario} su {SUPERFICE}: {mean_ace_2022_superfice_vs_opp_gSlam:.2f} | std: {dev_std_aces_2022_superfice_vs_opp_gSlam:.2f}")
+# # Grandi Slam
+# print("\n\n--------------  GRANDI SLAM  --------------")
+# print(f"  Partite giocate: {n_matches_2022_gSlam}")
+# print(f"  Media aces : {mean_ace_2022_gSlam:.2f} | std: {dev_std_aces_2022_gSlam:.2f}")
+# # Superfice
+# print(f"\n- SUPERFICE: {SUPERFICE}")
+# print(f"  Partite GS giocate su {SUPERFICE}: {n_matches_2022_superfice_gSlam}")
+# print(f"  Media aces su {SUPERFICE}: {mean_ace_2022_superfice_gSlam:.2f} | std: {dev_std_aces_2022_superfice_gSlam:.2f}")
+# # Avversario
+# print(f"\n- AVVERSARIO: {avversario}")
+# print(f"  Partite VS {avversario} : {n_matches_2022_gSlam_vs_opp}")
+# print(f"  Media aces VS {avversario}: {mean_ace_2022_gSlam_vs_opp:.2f} | std: {dev_std_aces_2022_gSlam_vs_opp:.2f}")
+# # Superfice e Avversario
+# print(f"\n- AVVERSARIO & SUPERFICE")
+# print(f"  Partite giocate VS {avversario} su {SUPERFICE}: {n_matches_2022_superfice_vs_opp_gSlam}")
+# print(f"  Media aces VS {avversario} su {SUPERFICE}: {mean_ace_2022_superfice_vs_opp_gSlam:.2f} | std: {dev_std_aces_2022_superfice_vs_opp_gSlam:.2f}")
 
-# Tournament
-print(f"\n\n--------------  TOURNAMENT: {TOURNAMENT}  (2022)  --------------")
-print(f"  Partite giocate: {n_matches_2022_tournament}")
-print(f"  Media aces : {mean_ace_2022_tournament:.2f} | std: {dev_std_aces_2022_tournament:.2f}")
-# Avversario
-print(f"\n- AVVERSARIO: {avversario}")
-print(f"  Partite giocate VS {avversario} in {TOURNAMENT}: {n_matches_2022_tournament_vs_opp}")
-print(f"  Media aces VS {avversario} in {TOURNAMENT}: {mean_ace_2022_tournament_vs_opp:.2f} | std: {dev_std_aces_2022_tournament_vs_opp:.2f}")
+# # Tournament
+# print(f"\n\n--------------  TOURNAMENT: {TOURNAMENT}  (2022)  --------------")
+# print(f"  Partite giocate: {n_matches_2022_tournament}")
+# print(f"  Media aces : {mean_ace_2022_tournament:.2f} | std: {dev_std_aces_2022_tournament:.2f}")
+# # Avversario
+# print(f"\n- AVVERSARIO: {avversario}")
+# print(f"  Partite giocate VS {avversario} in {TOURNAMENT}: {n_matches_2022_tournament_vs_opp}")
+# print(f"  Media aces VS {avversario} in {TOURNAMENT}: {mean_ace_2022_tournament_vs_opp:.2f} | std: {dev_std_aces_2022_tournament_vs_opp:.2f}")
 
 
 
