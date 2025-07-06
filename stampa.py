@@ -12,6 +12,9 @@ GIOCATORE = "Karen Khachanov"
 avversario = "Kamil Majchrzak"
 SUPERFICE = "Grass"
 TOURNAMENT = "Wimbledon"
+UNDER_OVER_TYPE = "Under"
+UNDER_OVER_VALUE = 18.5 
+
 
 
 df_match_2024 = pd.read_csv('data/atp_matches_2024.csv')
