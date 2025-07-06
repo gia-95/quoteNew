@@ -6,20 +6,20 @@ warnings.simplefilter(action='ignore', category=pd.errors.SettingWithCopyWarning
 print()
 
 
-
-#####   Parametri   ######  
-GIOCATORE = "Karen Khachanov"
-avversario = "Kamil Majchrzak"
+#####   Parametri   ######
+GENDER = "W"   
+GIOCATORE = "Elise Mertens"
+avversario = "Aryna Sabalenka"
 SUPERFICE = "Grass"
 TOURNAMENT = "Wimbledon"
 UNDER_OVER_TYPE = "Under"
-UNDER_OVER_VALUE = 18.5 
+UNDER_OVER_VALUE = 5.5 
 
+# Load CSV
+df_match_2024 = pd.read_csv(f"data/{'atp' if GENDER == 'M' else 'wta'}_matches_2024.csv")
+df_match_2023 = pd.read_csv(f"data/{'atp' if GENDER == 'M' else 'wta'}_matches_2023.csv")
+df_match_2022 = pd.read_csv(f"data/{'atp' if GENDER == 'M' else 'wta'}_matches_2022.csv")
 
-
-df_match_2024 = pd.read_csv('data/atp_matches_2024.csv')
-df_match_2023 = pd.read_csv('data/atp_matches_2023.csv')
-df_match_2022 = pd.read_csv('data/atp_matches_2022.csv')
 
 
 ######################################################
